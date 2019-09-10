@@ -1,0 +1,31 @@
+@model List<Tarefa>
+
+@{
+    ViewData["Title"] = "Tarefas";
+}
+
+<div class="row">
+    <a class="btn btn-primary" style="margin-bottom:20px" asp-controller="Tarefa" asp-action="Form">Nova</a>
+    
+    <table class="table bordered">
+        <thead>
+            <th>#</th>
+            <th>Descrição</th>
+            <th>Dt Atividade</th>
+            <th>Dt Entrega</th>
+            <th>Dt Limite</th>
+            <th>Diagnostico</th>
+            <th>Ações</th>
+        </thead>
+        @foreach(var item in Model){
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Descricao</td>
+                <td>@item.DtAtividade.ToString("dd/MM/yyyy")</td>                
+                <td>@item.DtEntrega?.ToString("dd/MM/yyyy")</td> 
+                <td>@item.DtLimiteEntrega?.ToString("dd/MM/yyyy")</td>
+                <td></td>
+            </tr>
+        }
+    </table>
+</div>
