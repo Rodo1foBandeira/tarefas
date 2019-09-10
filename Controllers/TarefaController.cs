@@ -21,15 +21,29 @@ namespace tarefas.Controllers
             return View(_context.Tarefas.ToList());
         }
 
-        public IActionResult Form()
+        public IActionResult Form(int? id)
         {            
-            return View(default(Tarefa));
+            var tarefa = default(Tarefa);
+            if (id != null)
+            {
+                tarefa = _context.Tarefas.Find(id);
+            }
+            return View(tarefa);
         }
 
         [HttpPost]
-        public IActionResult SaveUpdate(Tarefa request)
+        public async Task<IActionResult> SaveUpdate(Tarefa request)
         {
-            _context.DbSet<Tarefa>.SaveUpdate(request);
+            if (request.Id > 0)
+            {
+                _context.Update(request);
+            }
+            else
+            {
+                _context.Add(request);
+            }
+            
+            await _context.SaveChangesAsync();
             return RedirectToAction("Index"); 
         }
     }

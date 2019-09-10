@@ -24,7 +24,8 @@
                 <td>@item.DtAtividade.ToString("dd/MM/yyyy")</td>                
                 <td>@item.DtEntrega?.ToString("dd/MM/yyyy")</td> 
                 <td>@item.DtLimiteEntrega?.ToString("dd/MM/yyyy")</td>
-                <td></td>
+                <td>@item.Diagnostico</td>
+                <td><a class="btn btn-warning btn-sm" asp-controller="Tarefa" asp-action="Form" asp-route-id="@item.Id">Editar</a></td>
             </tr>
         }
     </table>
